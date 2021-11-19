@@ -1,4 +1,4 @@
-service: iamAuthApi
+service: iamauth
 
 variablesResolutionMode: 20210326
 
@@ -14,13 +14,14 @@ package:
     - '!.serverless/**'
 
 custom:
-  baseName: ${self:provider.stage}-${self:service}
+  project: template
+  baseName: ${self:custom.project}-${self:provider.stage}-${self:service}
 
   esbuild:
     target: node14
+    packager: yarn
     minify: true
     sourcemap: true
-    concurrency: 5
   
   serverless-s3-cleaner:
     buckets:
@@ -37,7 +38,6 @@ provider:
   stackName: ${self:custom.baseName}
   deploymentBucket:
     blockPublicAccess: true
-    maxPreviousDeploymentArtifacts: 2
   runtime: nodejs14.x
   memorySize: 128
   timeout: 25
