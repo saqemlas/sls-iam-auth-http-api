@@ -15,7 +15,7 @@ package:
 
 custom:
   project: template
-  baseName: ${self:custom.project}-${self:provider.stage}-${self:service}
+  baseName: ${self:custom.project}-${self:service}-${self:provider.stage}
 
   esbuild:
     target: node14
